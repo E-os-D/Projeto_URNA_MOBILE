@@ -31,7 +31,7 @@ Desenvolver um sistema de votação completo com interface intuitiva e armazenam
 
 ## 👥 Equipe
 
-- Rafaela Botelho – Desenvolvedor - P.O.
+- Rafaela Botelho – Desenvolvedor - Product Owner (P.O.)
 - Bruna Barbosa – Desenvolvedor - Scrum Master
 - Arthur Americo – Desenvolvedor
 - Raí Carvalho – Desenvolvedor
