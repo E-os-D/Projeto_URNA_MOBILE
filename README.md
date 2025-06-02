@@ -11,33 +11,11 @@ Desenvolver um sistema de votação completo com interface intuitiva e armazenam
 
 ---
 
-## 🧠 Planejamento e Arquitetura
-- Plano de ação do grupo
-- ✅ Diagrama de Casos de Uso
-- ✅ Diagrama de Classes
-- ✅ Diagrama Entidade-Relacionamento (DER)
-- ✅ Fluxo de telas (wireframes ou storyboard)
-
----
-
 ## 🛠️ Tecnologias Utilizadas
 - Python
 - Flet (interface Desktop, Web e Mobile)
 - SQLite (banco de dados)
 - Git/GitHub (controle de versão)
-- (opcional) plotly_chart (para gráficos)
-
----
-
-## 🧩 Funcionalidades Implementadas
-- Cadastro de candidatos
-- Votação por número
-- Gravação de votos no banco de dados
-- Contagem e exibição de resultados
-- Reset da urna (apagar votos)
-- (extra) Login de mesário/admin
-- (extra) Imagens dos candidatos
-- (extra) Gráficos de resultado
 
 ---
 
@@ -48,17 +26,12 @@ Desenvolver um sistema de votação completo com interface intuitiva e armazenam
 
 ---
 
-## 🧪 Testes e Prints
-Inclua aqui:
-- ✅ Prints das telas funcionando
-- ✅ Vídeo curto de demonstração (se possível)
-
----
-
 ## 👥 Equipe
-- Fulano – Programador
-- Beltrano – Banco de dados
-- Ciclano – Interface e design
+- Rafaela Botelho – Desenvolvedor - P.O.
+- Bruna Barbosa – Desenvolvedor - Scrum Master
+- Arthur Americo – Desenvolvedor
+- Raí Carvalho – Desenvolvedor
+- Cleyton Matheus - Desenvolvedor
 
 ---
 
