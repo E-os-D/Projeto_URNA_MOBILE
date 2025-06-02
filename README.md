@@ -7,13 +7,11 @@ Projeto de criação de uma Urna Eletrônica moderna utilizando **Flet** e **SQL
 ---
 
 ## 🎯 Objetivo do Projeto
-
 Desenvolver um sistema de votação completo com interface intuitiva e armazenamento persistente, aplicando conceitos de **desenvolvimento fullstack**, **responsividade**, **banco de dados** e boas práticas de programação.
 
 ---
 
 ## 🧠 Planejamento e Arquitetura
-
 - Plano de ação do grupo
 - ✅ Diagrama de Casos de Uso
 - ✅ Diagrama de Classes
@@ -23,7 +21,6 @@ Desenvolver um sistema de votação completo com interface intuitiva e armazenam
 ---
 
 ## 🛠️ Tecnologias Utilizadas
-
 - Python
 - Flet (interface Desktop, Web e Mobile)
 - SQLite (banco de dados)
@@ -33,7 +30,6 @@ Desenvolver um sistema de votação completo com interface intuitiva e armazenam
 ---
 
 ## 🧩 Funcionalidades Implementadas
-
 - Cadastro de candidatos
 - Votação por número
 - Gravação de votos no banco de dados
@@ -46,7 +42,6 @@ Desenvolver um sistema de votação completo com interface intuitiva e armazenam
 ---
 
 ## 💻 Plataformas Desenvolvidas
-
 - 💻 Flet Desktop (janelas)
 - 🌐 Flet Web (navegador)
 - 📱 Flet Mobile (testado em tablet Android)
@@ -54,7 +49,6 @@ Desenvolver um sistema de votação completo com interface intuitiva e armazenam
 ---
 
 ## 🧪 Testes e Prints
-
 Inclua aqui:
 - ✅ Prints das telas funcionando
 - ✅ Vídeo curto de demonstração (se possível)
@@ -62,7 +56,6 @@ Inclua aqui:
 ---
 
 ## 👥 Equipe
-
 - Fulano – Programador
 - Beltrano – Banco de dados
 - Ciclano – Interface e design
