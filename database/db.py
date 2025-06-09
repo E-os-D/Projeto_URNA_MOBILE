@@ -90,3 +90,18 @@ cursor = conn.cursor()
 # conn.close()
 
 # print("Banco de dados criado com sucesso!")
+
+# nome = "Bruna"
+# email = "bru@gmail.com"
+# senha = "123"
+
+# cursor.execute("INSERT INTO Admin (nome, email, senha) VALUES (?, ?, ?)", (nome, email, senha))
+
+# cursor.execute("DELETE FROM Admin WHERE idadmin = ?", (2,))
+
+
+# # Salva e fecha
+# conn.commit()
+# conn.close()
+
+# print("Banco de dados criado com sucesso!")
