@@ -8,18 +8,17 @@ def home_view():
                 controls=[
                     # Quadrado preto (fundo deslocado)
                     ft.Container(
-                        width=1200,
-                        height=900,
+                        width=1700,
+                        height=840,
                         bgcolor="black",
-                        border_radius=5,
-                        margin=ft.Margin(10, 10, 0, 0),  
+                        margin=ft.Margin(70, 70, 0, 0),  
                     ),
                     # Quadrado branco (sobreposição centralizada)
                     ft.Container(
-                        width=350,
-                        height=500,
+                        width=1700,
+                        height=850,
                         bgcolor="white",
-                        border_radius=5,
+                        border=ft.border.all(width=1, color="black"),
                         alignment=ft.alignment.center,
                         content=ft.Column(
                             [
@@ -29,7 +28,7 @@ def home_view():
                                 ft.TextButton("Votar", on_click=lambda _: _.page.go("/votacao_presidente")),
                                 ft.Row(
                                     [
-                                        ft.Text("→ Administrador."),
+                                        ft.TextButton("→ Administrador", on_click=lambda _: _.page.go("/admin_login")),
                                     ],
                                     alignment=ft.MainAxisAlignment.END
                                 )
