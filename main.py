@@ -11,7 +11,7 @@ from views.graficos import graficos_view
 
 def main(page: ft.Page):
     page.title = "Urna Eletrônica"
-    page.theme_mode = ft.ThemeMode.LIGHT
+    # page.theme_mode = ft.ThemeMode.LIGHT
     page.window.maximized = True
     # page.window.width = 1920
     # page.window.height = 1200
@@ -26,7 +26,7 @@ def main(page: ft.Page):
         elif page.route == "/admin_login":
             page.views.append(admin_login_view())
 
-        elif page.route == "/admin_panel":
+        elif page.route == "/admin_painel":
             page.views.append(admin_painel_view())
 
         elif page.route == "/cadastro_candidato":
