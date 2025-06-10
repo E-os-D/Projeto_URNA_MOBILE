@@ -2,6 +2,7 @@ import flet as ft
 from database.db import conn, cursor
 from views.home import home_view
 from views.admin_login import admin_login_view
+from views.eleitor_login import eleitor_login_view
 from views.admin_painel import admin_painel_view
 from views.cadastro_candidato import cadastro_candidato_view
 from views.cadastro_admin import cadastro_admin_view
@@ -25,6 +26,9 @@ def main(page: ft.Page):
 
         elif page.route == "/admin_login":
             page.views.append(admin_login_view())
+
+        elif page.route == "/eleitor_login":
+            page.views.append(eleitor_login_view())
 
         elif page.route == "/admin_painel":
             page.views.append(admin_painel_view())
