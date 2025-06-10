@@ -3,44 +3,62 @@ import flet as ft
 def home_view():
     return ft.View(
         route="/",
-        bgcolor = "#FCF8EC",
+        bgcolor="#FCF8EC",
         controls=[
             ft.Stack(
                 controls=[
-                    # Quadrado preto (fundo deslocado)
+                    # Fundo preto deslocado
                     ft.Container(
                         width=1700,
                         height=840,
                         bgcolor="black",
-                        margin=ft.Margin(70, 70, 0, 0),  
+                        margin=ft.Margin(70, 70, 0, 0),
                     ),
-                    # Quadrado branco (sobreposição centralizada)
+                    # Fundo branco por cima
                     ft.Container(
                         width=1700,
                         height=850,
                         bgcolor="white",
                         border=ft.border.all(width=1, color="black"),
-                        alignment=ft.alignment.center,
                         content=ft.Column(
                             controls=[
-                                # Conteúdo principal centralizado
-                                ft.Column(
-                                    controls=[
-                                        ft.Image(src="/mnt/data/645d4cf4-2632-4c1a-abf5-f3c5d21aed69.png", width=100),
-                                        ft.Text("Urna", size=30, weight="bold"),
-                                        ft.Text("Eletrônica", size=30, weight="bold"),
-                                        ft.TextButton("Votar", on_click=lambda e: e.page.go("/votacao_presidente")),
-                                    ],
+                                # Linha com imagem e texto
+                                ft.Row(
                                     alignment=ft.MainAxisAlignment.CENTER,
-                                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                                    expand=True
+                                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                                    controls=[
+                                        # Coluna com imagem e botão
+                                        ft.Column(
+                                            alignment=ft.MainAxisAlignment.CENTER,
+                                            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                                            controls=[
+                                                ft.Image(src="img/imgHome.png", width=200),
+                                                ft.TextButton(
+                                                    "Votar.",
+                                                    on_click=lambda e: e.page.go("/votacao_presidente"),
+                                                    style=ft.ButtonStyle(
+                                                        color="black",
+                                                        overlay_color="transparent"
+                                                    )
+                                                ),
+                                            ]
+                                        ),
+                                       # Coluna com título
+                                        ft.Column(
+                                            alignment=ft.MainAxisAlignment.CENTER,
+                                            horizontal_alignment=ft.CrossAxisAlignment.START,
+                                            controls=[
+                                                ft.Text("Urna", size=40, weight="bold"),
+                                                ft.Text("Eletrônica", size=40, weight="bold"),
+                                            ]
+                                        )
+                                    ]
                                 ),
-
-                                # Botão do administrador na base
+                                # Botão do administrador
                                 ft.Row(
                                     controls=[
                                         ft.TextButton(
-                                            "→ Administrador",
+                                            "→ Administrador.",
                                             on_click=lambda e: e.page.go("/admin_login"),
                                             style=ft.ButtonStyle(
                                                 color="black",
@@ -51,9 +69,9 @@ def home_view():
                                     alignment=ft.MainAxisAlignment.END
                                 )
                             ],
-                            expand=True,
-                            alignment=ft.MainAxisAlignment.START,
-                            horizontal_alignment=ft.CrossAxisAlignment.CENTER
+                            alignment=ft.MainAxisAlignment.CENTER,
+                            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                            expand=True
                         )
                     ),
                 ],
