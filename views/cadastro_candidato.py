@@ -11,6 +11,6 @@ def cadastro_candidato_view():
             ft.TextField(label="Cargo"),
             ft.TextField(label="Descrição"),
             ft.ElevatedButton("Salvar"),
-            ft.TextButton("Voltar", on_click=lambda _: _.page.go("/admin_panel"))
+            ft.TextButton("Voltar", on_click=lambda _: _.page.go("/admin_painel"))
         ]
     )

@@ -15,7 +15,7 @@ def admin_login_view():
         usuario = cursor.fetchone()
 
         if usuario:
-            e.page.go("/admin_panel")
+            e.page.go("/admin_painel")
         else:
             mensagem.value = "Email ou senha inválidos!"
             e.page.update()
