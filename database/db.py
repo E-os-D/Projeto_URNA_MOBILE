@@ -106,11 +106,4 @@ cursor = conn.cursor()
 # print("Banco de dados criado com sucesso!")
 
 # Adiciona a coluna apenas se ela ainda não existir
-try:
-    cursor.execute("ALTER TABLE Eleitor ADD COLUMN ja_votou INTEGER DEFAULT 0;")
-    print("Coluna 'ja_votou' adicionada com sucesso.")
-except sqlite3.OperationalError:
-    print("Coluna 'ja_votou' já existe.")
 
-conn.commit()
-conn.close()

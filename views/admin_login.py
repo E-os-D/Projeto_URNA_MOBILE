@@ -46,15 +46,15 @@ def admin_login_view():
                 controls=[
                     ft.Container(
                         width=1700,
-                        height=840,
-                        bgcolor="black",
-                        margin=ft.Margin(70, 70, 0, 0),
-                    ),
-                    ft.Container(
-                        width=1700,
                         height=850,
                         bgcolor="white",
                         border=ft.border.all(width=1, color="black"),
+                        shadow=ft.BoxShadow(
+                                            spread_radius=0,
+                                            blur_radius=0,
+                                            color="black",
+                                            offset=ft.Offset(30, 30)
+                                        ),
                         alignment=ft.alignment.center,
                         content=ft.Column(
                             controls=[
@@ -92,7 +92,23 @@ def admin_login_view():
 
                                         mensagem,
 
-                                        ft.ElevatedButton("Entrar", on_click=login),
+                                        ft.Container(
+                                            content=ft.Text("ENTRAR", size=16, weight="bold", color="black"),
+                                            alignment=ft.alignment.center,
+                                            width=150,
+                                            height=50,
+                                            bgcolor="#FCF8EC",
+                                            border=ft.border.all(1, "black"),
+                                            margin=ft.margin.only(top=5, left=5),
+                                            ink=True,
+                                            on_click=login,
+                                            shadow=ft.BoxShadow(
+                                                spread_radius=0,
+                                                blur_radius=0,
+                                                color="black",
+                                                offset=ft.Offset(5, 5)
+                                            ),
+                                        ),
                                     ],
                                     alignment=ft.MainAxisAlignment.CENTER,
                                     horizontal_alignment=ft.CrossAxisAlignment.CENTER,
