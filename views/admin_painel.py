@@ -5,7 +5,7 @@ def admin_painel_view():
         e.page.go("/")
 
     def ir_candidatos(e):
-        e.page.go("/cadastro_candidato")
+        e.page.go("/cadastro_candidato_painel")
 
     def ir_relatorio(e):
         e.page.go("/resultado")
