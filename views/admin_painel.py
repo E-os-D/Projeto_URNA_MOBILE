@@ -23,7 +23,7 @@ def admin_painel_view():
                 content=ft.Column([
                     ft.Image(src="img/admin_candidatos.png", width=150),
                     ft.Container(
-                        content=ft.Text("Candidatos.", size=20, weight="bold"),
+                        content=ft.Text("Candidatos.", size=20),
                         alignment=ft.alignment.center_right,
                         width=150
                     )
@@ -34,7 +34,7 @@ def admin_painel_view():
                 content=ft.Column([
                     ft.Image(src="img/admin_relatorio.png", width=150),
                     ft.Container(
-                        content=ft.Text("Relatório.", size=20, weight="bold"),
+                        content=ft.Text("Relatório.", size=20),
                         alignment=ft.alignment.center_right,
                         width=150
                     )
@@ -53,7 +53,7 @@ def admin_painel_view():
                 content=ft.Column([
                     ft.Image(src="img/admin_grafico.png", width=150),
                     ft.Container(
-                        content=ft.Text("Gráfico.", size=20, weight="bold"),
+                        content=ft.Text("Gráfico.", size=20),
                         alignment=ft.alignment.center_right,
                         width=150
                     )
@@ -64,7 +64,7 @@ def admin_painel_view():
                 content=ft.Column([
                     ft.Image(src="img/admin_administrador.png", width=150),
                     ft.Container(
-                        content=ft.Text("Administrador.", size=20, weight="bold"),
+                        content=ft.Text("Administrador.", size=20),
                         alignment=ft.alignment.center_right,
                         width=150
                     )
@@ -78,53 +78,68 @@ def admin_painel_view():
 
     # Botão de voltar no canto inferior direito
     voltar_row = ft.Row(
-        [ft.TextButton("→ Voltar.", on_click=voltar)],
+        [ft.TextButton(
+            "← Voltar",
+            on_click=voltar,
+            style=ft.ButtonStyle(color="black")
+        )],
         alignment="end"
     )
 
     return ft.View(
         route="/admin_painel",
         bgcolor="#FCF8EC",
+        padding=20,
         controls=[
-            ft.Stack(
-                controls=[
-                    # Moldura preta
-                    ft.Container(
-                        width=1700,
-                        height=840,
-                        bgcolor="black",
-                        margin=ft.Margin(70, 70, 0, 0),
-                    ),
-                    # Moldura branca com conteúdo
-                    ft.Container(
-                        width=1700,
-                        height=850,
-                        bgcolor="white",
-                        border=ft.border.all(width=1, color="black"),
-                        content=ft.Column(
-                            controls=[
-                                ft.Container(  # Centro dos ícones
-                                    content=ft.Column(
-                                        [opcoes, opcoes2],
-                                        spacing=50,
-                                        alignment="center"
-                                    ),
-                                    expand=True,
-                                    alignment=ft.alignment.center
-                                ),
-                                voltar_row  # Botão no fim
-                            ],
-                            alignment="spaceBetween",  # ícones no centro, botão no final
-                            expand=True
-                        ),
-                        padding=50,
-                        alignment=ft.alignment.center
-                    )
-                ],
+            ft.Container(
                 expand=True,
-                alignment=ft.alignment.center
+                alignment=ft.alignment.center,
+                content=ft.Column(
+                    expand=True,
+                    alignment=ft.MainAxisAlignment.CENTER,
+                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    controls=[
+                        ft.Container(
+                            expand=True,
+                            alignment=ft.alignment.center,
+                            content=ft.ResponsiveRow(
+                                alignment=ft.MainAxisAlignment.CENTER,
+                                vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                                controls=[
+                                    ft.Container(
+                                        col={"sm": 12, "md": 10, "lg": 8, "xl": 6},
+                                        padding=70,
+                                        bgcolor="white",
+                                        border=ft.border.all(width=1, color="black"),
+                                        shadow=ft.BoxShadow(
+                                            spread_radius=0,
+                                            blur_radius=0,
+                                            color="black",
+                                            offset=ft.Offset(15, 15)
+                                        ),
+                                        content=ft.Column(
+                                            scroll=ft.ScrollMode.AUTO,
+                                            alignment=ft.MainAxisAlignment.CENTER,
+                                            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                                            controls=[
+                                            ft.Container(  # Centro dos ícones
+                                                content=ft.Column(
+                                                    [opcoes, opcoes2],
+                                                    spacing=50,
+                                                    alignment="center"
+                                                ),
+                                                expand=True,
+                                                alignment=ft.alignment.center
+                                            ),
+                                            voltar_row  # Botão no fim
+                                        ],
+                                        )
+                                    )
+                                ]
+                            )
+                        )
+                    ]
+                )
             )
-        ],
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        vertical_alignment=ft.MainAxisAlignment.CENTER
+        ]
     )
