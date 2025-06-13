@@ -5,7 +5,7 @@ def cadastro_admin_view():
     nome = ft.TextField(
         label="Nome",
         width=800, 
-        bgcolor="#F5E4EB", 
+        bgcolor="#DFEDFF", 
         color="#000000", 
         label_style=ft.TextStyle(size=18, weight=ft.FontWeight.W_500),
         border_radius=ft.border_radius.all(50),
@@ -14,7 +14,7 @@ def cadastro_admin_view():
     email = ft.TextField(
         label="Email",
         width=800, 
-        bgcolor="#F5E4EB", 
+        bgcolor="#DFEDFF", 
         color="#000000", 
         label_style=ft.TextStyle(size=18, weight=ft.FontWeight.W_500),
         border_radius=ft.border_radius.all(50),
@@ -24,7 +24,7 @@ def cadastro_admin_view():
         label="Senha", 
         password=True,
         width=800, 
-        bgcolor="#F5E4EB", 
+        bgcolor="#DFEDFF", 
         color="#000000", 
         label_style=ft.TextStyle(size=18, weight=ft.FontWeight.W_500),
         border_radius=ft.border_radius.all(50),
@@ -62,7 +62,7 @@ def cadastro_admin_view():
     
     return ft.View(
         route="/cadastro_admin",
-        bgcolor="#ECCAD8",
+        bgcolor="#D3E5FD",
         padding=20,
         controls=[
             ft.Container(

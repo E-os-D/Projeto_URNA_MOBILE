@@ -25,9 +25,9 @@ def cadastro_candidato_painel_view():
         txt = e.control.content
         if isinstance(txt, ft.Text):
             if e.data == "true":
-                e.control.bgcolor = "black"
-                e.control.border = ft.border.all(1, "white")
-                txt.color = "white"
+                e.control.bgcolor = "#F2EEE3" 
+                e.control.border = ft.border.all(1, "black")
+                txt.color = "black"
             else:
                 e.control.bgcolor = "#FCF8EC"
                 e.control.border = ft.border.all(1, "black")
@@ -48,7 +48,7 @@ def cadastro_candidato_painel_view():
                     controls=[
                         ft.Container(
                             col={"sm": 12, "md": 10, "lg": 8, "xl": 6},
-                            height=420,
+                            height=580,
                             padding=30,
                             bgcolor="white",
                             border=ft.border.all(1, "black"),
@@ -73,11 +73,13 @@ def cadastro_candidato_painel_view():
                                     cargo_botao("Presidente", "/cadastro_presidente"),
                                     cargo_botao("Governador", "/cadastro_governador"),
                                     cargo_botao("Prefeito", "/cadastro_prefeito"),
+                                    cargo_botao("Partido", "/cadastro_partido"),
+                                    cargo_botao("Administrador", "/cadastro_admin"),
                                     ft.Row(
                                         alignment=ft.MainAxisAlignment.END,
                                         controls=[
                                             ft.TextButton(
-                                                "→ Voltar.",
+                                                "← Voltar.",
                                                 style=ft.ButtonStyle(color="black"),
                                                 on_click=lambda e: e.page.go("/admin_painel")
                                             )

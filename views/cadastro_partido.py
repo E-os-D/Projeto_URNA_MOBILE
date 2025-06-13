@@ -1,55 +1,69 @@
 import flet as ft
 import sqlite3
 
-def eleitor_login_view():
+def cadastro_partido_view():
     nome = ft.TextField(
         label="Nome",
         width=800, 
-        bgcolor="#FCF8EC", 
+        bgcolor="#DFEDFF", 
         color="#000000", 
         label_style=ft.TextStyle(size=18, weight=ft.FontWeight.W_500),
         border_radius=ft.border_radius.all(50),
         content_padding=ft.Padding(top=22, bottom=22, left=16, right=16)
-        )
-    idRG = ft.TextField(
-        label="RG",
+    )
+    numero = ft.TextField(
+        label="Número",
+        password=True,
         width=800, 
-        bgcolor="#FCF8EC", 
+        bgcolor="#DFEDFF", 
         color="#000000", 
         label_style=ft.TextStyle(size=18, weight=ft.FontWeight.W_500),
         border_radius=ft.border_radius.all(50),
         content_padding=ft.Padding(top=22, bottom=22, left=16, right=16)
         )
-    
-    mensagem = ft.Text("", color="red")
+    sigla = ft.TextField(
+        label="Sigla", 
+        password=True,
+        width=800, 
+        bgcolor="#DFEDFF", 
+        color="#000000", 
+        label_style=ft.TextStyle(size=18, weight=ft.FontWeight.W_500),
+        border_radius=ft.border_radius.all(50),
+        content_padding=ft.Padding(top=22, bottom=22, left=16, right=16)
+        )
 
+    mensagem = ft.Text("", color="red")
+    
     def login(e):
         conn = sqlite3.connect("urna_eletronica.db")
         cursor = conn.cursor()
 
-        # Verifica se o eleitor já está cadastrado
-        cursor.execute("SELECT * FROM Eleitor WHERE idRG = ?", (idRG.value,))
+        # Verifica se o partido já está cadastrado
+        cursor.execute("SELECT * FROM Partidos WHERE id_partido = ?", (numero.value,))
         usuario = cursor.fetchone()
 
         if usuario:
-            mensagem.value = "Eleitor já votou."
+            mensagem.value = "Partido já cadastrado."
         else:
-            if nome.value.strip() == "" or idRG.value.strip() == "":
+            if nome.value.strip() == "" or numero.value.strip() == "" or sigla.value.strip() == "":
                 mensagem.value = "Preencha todos os campos."
             else:
-                # Cadastra o eleitor
-                cursor.execute("INSERT INTO Eleitor (nome, idRG) VALUES (?, ?)", (nome.value, idRG.value))
+                # Cadastra o partido
+                cursor.execute("INSERT INTO Partidos (nome, id_partido, sigla) VALUES (?, ?, ?)",
+                            (nome.value, numero.value, sigla.value))
                 conn.commit()
-                conn.close()
-                e.page.go("/votacao_presidente")
-                return
+                mensagem.value = "Partido cadastrado com sucesso!"
+                # Limpa os campos
+                nome.value = ""
+                numero.value = ""
+                sigla.value = ""
 
         conn.close()
         e.page.update()
-
+    
     return ft.View(
-        route="/eleitor_login",
-        bgcolor="#FCF8EC",
+        route="/cadastro_partido",
+        bgcolor="#D3E5FD",
         padding=20,
         controls=[
             ft.Container(
@@ -84,7 +98,7 @@ def eleitor_login_view():
                                             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                                             controls=[
                                                 ft.Container(
-                                                    content=ft.Text("Registro de Votação", size=32, weight="bold"),
+                                                    content=ft.Text("Cadastro de Partido", size=32, weight="bold"),
                                                     padding=ft.padding.only(bottom=50)
                                                 ),
                                                 #NOME
@@ -97,19 +111,28 @@ def eleitor_login_view():
                                                     nome,
                                                     ft.Container(height=20)
                                                 ]),
-                                                #RG
+                                                #Número
                                                 ft.Column([
                                                     ft.Container(
-                                                        content=ft.Text("RG:", size=23, weight="bold"),
+                                                        content=ft.Text("Número:", size=23, weight="bold"),
                                                         alignment=ft.alignment.top_left,
                                                         padding=ft.padding.only(left=20, bottom=10)
                                                     ),
-                                                    idRG
+                                                    numero
+                                                ]),
+                                                #SIGLA
+                                                ft.Column([
+                                                    ft.Container(
+                                                        content=ft.Text("Sigla:", size=23, weight="bold"),
+                                                        alignment=ft.alignment.top_left,
+                                                        padding=ft.padding.only(left=20, bottom=10)
+                                                    ),
+                                                    sigla
                                                 ]),
                                                 mensagem,
                                                 ft.Container(height=20),
                                                 ft.Container(
-                                                    content=ft.Text("REGISTRAR", size=16, weight="bold", color="black"),
+                                                    content=ft.Text("CADASTRAR", size=16, weight="bold", color="black"),
                                                     alignment=ft.alignment.center,
                                                     width=150,
                                                     height=50,
@@ -131,7 +154,7 @@ def eleitor_login_view():
                                                     controls=[
                                                         ft.TextButton(
                                                             "← Voltar",
-                                                            on_click=lambda _: _.page.go("/"),
+                                                            on_click=lambda _: _.page.go("/admin_painel"),
                                                             style=ft.ButtonStyle(color="black")
                                                         )
                                                     ]
