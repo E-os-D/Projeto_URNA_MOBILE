@@ -14,6 +14,9 @@ def admin_painel_view():
     def voltar(e):
         e.page.go("/")
 
+    def ir_remocao(e):
+        e.page.go("/remocao_painel")
+
     def ir_cadastrar(e):
         e.page.go("/admin_painel_cadastro")
 
@@ -169,7 +172,7 @@ def admin_painel_view():
         e.page.go("/graficos")
 
     def ir_remocao(e):
-        e.page.go("/admin_remocao")
+        e.page.go("/remocao_painel")
 
     # Linha 1 de ícones
     # Linha 1 de ícones (Responsiva)
