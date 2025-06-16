@@ -172,64 +172,84 @@ def admin_painel_view():
         e.page.go("/admin_remocao")
 
     # Linha 1 de ícones
-    opcoes = ft.Row(
+    # Linha 1 de ícones (Responsiva)
+    opcoes = ft.ResponsiveRow(
         controls=[
-            ft.GestureDetector(
-                content=ft.Column([
-                    ft.Image(src="img/admin_candidatos.png", width=150),
-                    ft.Container(
-                        content=ft.Text("Cadastrar.", size=20),
-                        alignment=ft.alignment.center_right,
-                        width=150
-                    )
-                ], horizontal_alignment="center"),
-                on_tap=ir_cadastrar
+            ft.Container(
+                col={"xs": 12, "sm": 6},
+                content=ft.GestureDetector(
+                    content=ft.Column([
+                        ft.Image(src="img/admin_candidatos.png", width=150),
+                        ft.Container(
+                            content=ft.Text("Cadastrar.", size=20),
+                            alignment=ft.alignment.center_right,
+                            width=150
+                        )
+                    ], horizontal_alignment="center"),
+                    on_tap=ir_cadastrar
+                ),
+                alignment=ft.alignment.center
             ),
-            ft.GestureDetector(
-                content=ft.Column([
-                    ft.Image(src="img/admin_relatorio.png", width=150),
-                    ft.Container(
-                        content=ft.Text("Relatório.", size=20),
-                        alignment=ft.alignment.center_right,
-                        width=150
-                    )
-                ], horizontal_alignment="center"),
-                on_tap=ir_relatorio # Chamará a função modificada
+            ft.Container(
+                col={"xs": 12, "sm": 6},
+                content=ft.GestureDetector(
+                    content=ft.Column([
+                        ft.Image(src="img/admin_relatorio.png", width=150),
+                        ft.Container(
+                            content=ft.Text("Relatório.", size=20),
+                            alignment=ft.alignment.center_right,
+                            width=150
+                        )
+                    ], horizontal_alignment="center"),
+                    on_tap=ir_relatorio
+                ),
+                alignment=ft.alignment.center
             )
         ],
-        alignment="center",
-        spacing=80
+        alignment=ft.MainAxisAlignment.CENTER,
+        spacing=80,
+        run_spacing=20
     )
 
-    # Linha 2 de ícones
-    opcoes2 = ft.Row(
+    # Linha 2 de ícones (Responsiva)
+    opcoes2 = ft.ResponsiveRow(
         controls=[
-            ft.GestureDetector(
-                content=ft.Column([
-                    ft.Image(src="img/admin_grafico.png", width=150),
-                    ft.Container(
-                        content=ft.Text("Gráfico.", size=20),
-                        alignment=ft.alignment.center_right,
-                        width=150
-                    )
-                ], horizontal_alignment="center"),
-                on_tap=ir_grafico
+            ft.Container(
+                col={"xs": 12, "sm": 6},
+                content=ft.GestureDetector(
+                    content=ft.Column([
+                        ft.Image(src="img/admin_grafico.png", width=150),
+                        ft.Container(
+                            content=ft.Text("Gráfico.", size=20),
+                            alignment=ft.alignment.center_right,
+                            width=150
+                        )
+                    ], horizontal_alignment="center"),
+                    on_tap=ir_grafico
+                ),
+                alignment=ft.alignment.center
             ),
-            ft.GestureDetector(
-                content=ft.Column([
-                    ft.Image(src="img/admin_administrador.png", width=150),
-                    ft.Container(
-                        content=ft.Text("Remoção.", size=20),
-                        alignment=ft.alignment.center_right,
-                        width=150
-                    )
-                ], horizontal_alignment="center"),
-                on_tap=ir_remocao
+            ft.Container(
+                col={"xs": 12, "sm": 6},
+                content=ft.GestureDetector(
+                    content=ft.Column([
+                        ft.Image(src="img/admin_administrador.png", width=150),
+                        ft.Container(
+                            content=ft.Text("Remoção.", size=20),
+                            alignment=ft.alignment.center_right,
+                            width=150
+                        )
+                    ], horizontal_alignment="center"),
+                    on_tap=ir_remocao
+                ),
+                alignment=ft.alignment.center
             )
         ],
-        alignment="center",
-        spacing=80
+        alignment=ft.MainAxisAlignment.CENTER,
+        spacing=80,
+        run_spacing=20
     )
+
 
     # Botão de voltar no canto inferior direito
     voltar_row = ft.Row(
