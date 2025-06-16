@@ -1,6 +1,6 @@
 import flet as ft
 
-def cadastro_candidato_painel_view():
+def admin_painel_cadastro_view():
     def cargo_botao(nome, rota):
         return ft.Container(
             content=ft.Text(nome, size=16, weight="bold", color="black"),
@@ -70,7 +70,7 @@ def cadastro_candidato_painel_view():
                                         weight=ft.FontWeight.W_600,
                                         text_align=ft.TextAlign.CENTER,
                                     ),
-                                    cargo_botao("Presidente", "/cadastro_candidato"),
+                                    cargo_botao("Presidente", "/cadastro_presidente"),
                                     cargo_botao("Governador", "/cadastro_governador"),
                                     cargo_botao("Prefeito", "/cadastro_prefeito"),
                                     cargo_botao("Partido", "/cadastro_partido"),

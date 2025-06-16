@@ -4,8 +4,10 @@ from views.home import home_view
 from views.admin_login import admin_login_view
 from views.eleitor_login import eleitor_login_view
 from views.admin_painel import admin_painel_view
-from views.cadastro_candidato import cadastro_candidato_view
-from views.cadastro_candidato_painel import cadastro_candidato_painel_view
+from views.cadastro_presidente import cadastro_presidente_view
+from views.cadastro_prefeito import cadastro_prefeito_view
+from views.cadastro_governador import cadastro_governador_view
+from views.admin_painel_cadastro import admin_painel_cadastro_view
 from views.cadastro_admin import cadastro_admin_view
 from views.cadastro_partido import cadastro_partido_view
 from views.votacao import votacao_view, proxima_votacao
@@ -35,11 +37,17 @@ def main(page: ft.Page):
         elif page.route == "/admin_painel":
             page.views.append(admin_painel_view())
 
-        elif page.route == "/cadastro_candidato":
-            page.views.append(cadastro_candidato_view())
+        elif page.route == "/cadastro_presidente":
+            page.views.append(cadastro_presidente_view())
 
-        elif page.route == "/cadastro_candidato_painel":
-            page.views.append(cadastro_candidato_painel_view())
+        elif page.route == "/cadastro_prefeito":
+            page.views.append(cadastro_prefeito_view())
+
+        elif page.route == "/cadastro_governador":
+            page.views.append(cadastro_governador_view())
+
+        elif page.route == "/admin_painel_cadastro":
+            page.views.append(admin_painel_cadastro_view())
 
         elif page.route == "/cadastro_admin":
             page.views.append(cadastro_admin_view())

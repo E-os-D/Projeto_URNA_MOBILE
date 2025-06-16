@@ -153,7 +153,7 @@ def cadastro_admin_view():
                                                     controls=[
                                                         ft.TextButton(
                                                             "← Voltar",
-                                                            on_click=lambda _: _.page.go("/admin_painel"),
+                                                            on_click=lambda _: _.page.go("/admin_painel_cadastro"),
                                                             style=ft.ButtonStyle(color="black")
                                                         )
                                                     ]
