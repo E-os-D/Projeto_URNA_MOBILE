@@ -34,7 +34,7 @@ def main(page: ft.Page):
         page.views.clear()
 
         if page.route == "/":
-            page.views.append(home_view())
+            page.views.append(home_view(page))
 
         elif page.route == "/admin_login":
             page.views.append(admin_login_view())
