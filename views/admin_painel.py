@@ -1,7 +1,14 @@
 import flet as ft
 import sqlite3
 import os
-from datetime import datetime # Para nomear o arquivo com data e hora
+from datetime import datetime
+
+# Função para estabelecer conexão com o banco de dados
+def get_db_connection():
+    conn = sqlite3.connect("urna_eletronica.db")
+    # Configura o row_factory para acessar colunas por nome
+    conn.row_factory = sqlite3.Row
+    return conn
 
 def admin_painel_view():
     def voltar(e):
@@ -10,94 +17,153 @@ def admin_painel_view():
     def ir_cadastrar(e):
         e.page.go("/admin_painel_cadastro")
 
-    # A função ir_relatorio será modificada para gerar o TXT
-    def ir_relatorio(e):
-        # Gera um nome de arquivo único com a data e hora atual
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        nome_arquivo = f"relatorio_votacao_{timestamp}.txt"
-        
-        relatorio_conteudo = []
-        relatorio_conteudo.append("--- RELATÓRIO DE VOTAÇÃO ---\n")
-        relatorio_conteudo.append(f"Gerado em: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}\n")
-        relatorio_conteudo.append("------------------------------\n\n")
-
+    # A função ir_relatorio voltou a ser síncrona
+    def ir_relatorio(e: ft.ControlEvent): # A função não é mais assíncrona
         conn = None # Inicializa conn como None
         try:
-            conn = sqlite3.connect("urna_eletronica.db")
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            nome_arquivo = f"relatorio_votacao_{timestamp}.txt" # Salva no diretório atual
+            
+            relatorio_conteudo = []
+            relatorio_conteudo.append("--- RELATÓRIO DE VOTAÇÃO ---\n")
+            relatorio_conteudo.append(f"Gerado em: {datetime.now().strftime('%d/%m/%Y %H:%M:%S')}\n")
+            relatorio_conteudo.append("------------------------------\n\n")
+
+            conn = get_db_connection()
             cursor = conn.cursor()
+
+            # Função auxiliar para obter o nome do partido dado o ID
+            def get_party_name(party_id):
+                if party_id is None:
+                    return "Não Informado" # Caso o id_partido seja nulo
+                cursor.execute("SELECT nome FROM Partidos WHERE id_partido = ?", (party_id,))
+                result = cursor.fetchone()
+                return result['nome'] if result else "Partido Desconhecido"
 
             # --- Votos para Presidente ---
             relatorio_conteudo.append("--- RESULTADO PRESIDENTE ---\n")
-            cursor.execute("SELECT id_número_presidente, nome, votos FROM Presidente ORDER BY votos DESC")
+            cursor.execute("""
+                SELECT
+                    p.id_número_presidente,
+                    p.nome,
+                    p.id_partido,
+                    COUNT(vp.idvotos) AS total_votos
+                FROM
+                    Presidente AS p
+                LEFT JOIN
+                    Votação_presidente AS vp ON p.id_número_presidente = vp.id_número_presidente
+                GROUP BY
+                    p.id_número_presidente, p.nome, p.id_partido
+                ORDER BY
+                    total_votos DESC;
+            """)
             presidentes = cursor.fetchall()
+            
             if presidentes:
-                for num, nome_pres, votos in presidentes:
-                    relatorio_conteudo.append(f"Número: {num} | Nome: {nome_pres} | Votos: {votos}\n")
+                # Encontra o ganhador (o primeiro da lista ordenada)
+                winner_pres = presidentes[0]
+                party_name_pres = get_party_name(winner_pres['id_partido'])
+                relatorio_conteudo.append(f"GANHADOR: {winner_pres['nome']} | PARTIDO: {party_name_pres} | NÚMERO: {winner_pres['id_número_presidente']}\n")
+                relatorio_conteudo.append("----------------------------------\n")
+                for row in presidentes:
+                    relatorio_conteudo.append(f"Número: {row['id_número_presidente']} | Nome: {row['nome']} | Votos: {row['total_votos']}\n")
             else:
                 relatorio_conteudo.append("Nenhum candidato a Presidente encontrado ou sem votos.\n")
             relatorio_conteudo.append("\n")
 
             # --- Votos para Governador ---
             relatorio_conteudo.append("--- RESULTADO GOVERNADOR ---\n")
-            cursor.execute("SELECT id_número_governador, nome, votos FROM Governador ORDER BY votos DESC")
+            cursor.execute("""
+                SELECT
+                    g.id_número_governador,
+                    g.nome,
+                    g.id_partido,
+                    COUNT(vg.idvotos) AS total_votos
+                FROM
+                    Governador AS g
+                LEFT JOIN
+                    Votação_governador AS vg ON g.id_número_governador = vg.id_número_governador
+                GROUP BY
+                    g.id_número_governador, g.nome, g.id_partido
+                ORDER BY
+                    total_votos DESC;
+            """)
             governadores = cursor.fetchall()
             if governadores:
-                for num, nome_gov, votos in governadores:
-                    relatorio_conteudo.append(f"Número: {num} | Nome: {nome_gov} | Votos: {votos}\n")
+                # Encontra o ganhador
+                winner_gov = governadores[0]
+                party_name_gov = get_party_name(winner_gov['id_partido'])
+                relatorio_conteudo.append(f"GANHADOR: {winner_gov['nome']} | PARTIDO: {party_name_gov} | NÚMERO: {winner_gov['id_número_governador']}\n")
+                relatorio_conteudo.append("----------------------------------\n")
+                for row in governadores:
+                    relatorio_conteudo.append(f"Número: {row['id_número_governador']} | Nome: {row['nome']} | Votos: {row['total_votos']}\n")
             else:
                 relatorio_conteudo.append("Nenhum candidato a Governador encontrado ou sem votos.\n")
             relatorio_conteudo.append("\n")
-            
-            # --- Votos Nulos e Brancos (exemplo, ajuste conforme seu DB) ---
-            # Se você tiver uma tabela ou forma de registrar votos nulos/brancos
-            relatorio_conteudo.append("--- OUTROS VOTOS ---\n")
-            # Exemplo: Se você tiver uma tabela 'VotosGerais' ou similar
-            # cursor.execute("SELECT tipo, total_votos FROM VotosGerais WHERE tipo IN ('NULOS', 'BRANCOS')")
-            # outros_votos = cursor.fetchall()
-            # for tipo, total in outros_votos:
-            #     relatorio_conteudo.append(f"{tipo}: {total}\n")
-            relatorio_conteudo.append("Nulos: (Ajustar consulta)\n")
-            relatorio_conteudo.append("Brancos: (Ajustar consulta)\n")
+
+            # --- Votos para Prefeito ---
+            relatorio_conteudo.append("--- RESULTADO PREFEITO ---\n")
+            cursor.execute("""
+                SELECT
+                    pf.id_número_prefeito,
+                    pf.nome,
+                    pf.id_partido,
+                    COUNT(vpf.idvotos) AS total_votos
+                FROM
+                    Prefeito AS pf
+                LEFT JOIN
+                    Votação_prefeito AS vpf ON pf.id_número_prefeito = vpf.id_número_prefeito
+                GROUP BY
+                    pf.id_número_prefeito, pf.nome, pf.id_partido
+                ORDER BY
+                    total_votos DESC;
+            """)
+            prefeitos = cursor.fetchall()
+            if prefeitos:
+                # Encontra o ganhador
+                winner_pref = prefeitos[0]
+                party_name_pref = get_party_name(winner_pref['id_partido'])
+                relatorio_conteudo.append(f"GANHADOR: {winner_pref['nome']} | PARTIDO: {party_name_pref} | NÚMERO: {winner_pref['id_número_prefeito']}\n")
+                relatorio_conteudo.append("----------------------------------\n")
+                for row in prefeitos:
+                    relatorio_conteudo.append(f"Número: {row['id_número_prefeito']} | Nome: {row['nome']} | Votos: {row['total_votos']}\n")
+            else:
+                relatorio_conteudo.append("Nenhum candidato a Prefeito encontrado ou sem votos.\n")
             relatorio_conteudo.append("\n")
 
-            # Salva o conteúdo no arquivo TXT
+            # --- Votos Nulos e Brancos (exemplo, ajuste conforme seu DB) ---
+            relatorio_conteudo.append("--- OUTROS VOTOS ---\n")
+            relatorio_conteudo.append("Nulos: (Implementar lógica para contar votos nulos)\n")
+            relatorio_conteudo.append("Brancos: (Implementar lógica para contar votos brancos)\n")
+            relatorio_conteudo.append("\n")
+
+            # Salva o conteúdo no arquivo TXT no diretório atual do script
             with open(nome_arquivo, "w", encoding="utf-8") as f:
                 f.writelines(relatorio_conteudo)
             
             print(f"Relatório salvo em: {os.path.abspath(nome_arquivo)}")
-            # Exibe uma mensagem de sucesso para o usuário
-            e.page.show_snack_bar(
-                ft.SnackBar(
-                    ft.Text(f"Relatório gerado com sucesso em '{nome_arquivo}'!"),
-                    open=True,
-                    bgcolor=ft.colors.GREEN_700
-                )
-            )
+            
+            # Exibe a mensagem de sucesso usando o SnackBar
+            e.page.snack_bar.content = ft.Text(f"Relatório gerado com sucesso em '{os.path.basename(nome_arquivo)}' (salvo na pasta do aplicativo).")
+            e.page.snack_bar.bgcolor = "#4CAF50"  # Verde para sucesso
+            e.page.snack_bar.open = True
 
         except sqlite3.Error as sqle:
             error_message = f"Erro no banco de dados ao gerar relatório: {sqle}"
-            print(error_message)
-            e.page.show_snack_bar(
-                ft.SnackBar(
-                    ft.Text(error_message),
-                    open=True,
-                    bgcolor=ft.colors.RED_700
-                )
-            )
+            print(error_message) # Para depuração no console
+            e.page.snack_bar.content = ft.Text(error_message)
+            e.page.snack_bar.bgcolor = "#D32F2F"  # Vermelho para erro
+            e.page.snack_bar.open = True
         except Exception as ex:
-            error_message = f"Erro inesperado ao gerar relatório: {ex}"
-            print(error_message)
-            e.page.show_snack_bar(
-                ft.SnackBar(
-                    ft.Text(error_message),
-                    open=True,
-                    bgcolor=ft.colors.RED_700
-                )
-            )
+            general_error_message = f"Erro inesperado ao gerar relatório: {ex}"
+            print(general_error_message) # Para depuração no console
+            e.page.snack_bar.content = ft.Text(general_error_message)
+            e.page.snack_bar.bgcolor = "#D32F2F"  # Vermelho para erro
+            e.page.snack_bar.open = True
         finally:
             if conn:
                 conn.close()
-        e.page.update()
+            e.page.update() # Garante que o SnackBar seja exibido
 
     def ir_grafico(e):
         e.page.go("/graficos")
@@ -211,7 +277,7 @@ def admin_painel_view():
                                             alignment=ft.MainAxisAlignment.CENTER,
                                             horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                                             controls=[
-                                                ft.Container(  # Centro dos ícones
+                                                ft.Container( # Centro dos ícones
                                                     content=ft.Column(
                                                         [opcoes, opcoes2],
                                                         spacing=50,
@@ -220,7 +286,7 @@ def admin_painel_view():
                                                     expand=True,
                                                     alignment=ft.alignment.center
                                                 ),
-                                                voltar_row  # Botão no fim
+                                                voltar_row # Botão no fim
                                             ],
                                         )
                                     )

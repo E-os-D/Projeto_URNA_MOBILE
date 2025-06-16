@@ -1,5 +1,5 @@
 import flet as ft
-from database.db import conn, cursor
+from database.db import conn, cursor # Assumindo que estas importações estão corretas
 from views.home import home_view
 from views.admin_login import admin_login_view
 from views.eleitor_login import eleitor_login_view
@@ -21,6 +21,14 @@ def main(page: ft.Page):
     # page.window.width = 1920
     # page.window.height = 1200
     page.window_resizable = False
+
+    # --- ADICIONE ESTA LINHA AQUI PARA INICIALIZAR O SNACKBAR ---
+    page.snack_bar = ft.SnackBar(
+        content=ft.Text(""), # O conteúdo inicial pode ser vazio
+        open=False,          # Começa fechado
+        action="Ok"          # Um botão de ação opcional para fechar o snackbar
+    )
+    # -----------------------------------------------------------
 
     def route_change(route):
         page.views.clear()
