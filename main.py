@@ -12,7 +12,7 @@ from views.cadastro_admin import cadastro_admin_view
 from views.cadastro_partido import cadastro_partido_view
 from views.votacao import votacao_view, proxima_votacao
 from views.resultado import resultado_view
-from views.graficos import graficos_view
+from views.graficos import graficos_selecao_view
 
 def main(page: ft.Page):
     page.title = "Urna Eletrônica"
@@ -76,7 +76,7 @@ def main(page: ft.Page):
             page.views.append(resultado_view())
 
         elif page.route == "/graficos":
-            page.views.append(graficos_view())
+            page.views.append(graficos_selecao_view())
 
         page.update()
 
