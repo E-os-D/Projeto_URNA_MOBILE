@@ -158,7 +158,7 @@ def graficos_view():
 
     return ft.View(
         route="/graficos_por_cargo",
-        bgcolor="#D3E5FD",
+        bgcolor="#D6CEE5",
         padding=20, # Changed from 100 to 20
         controls=[
             ft.Container(
@@ -211,7 +211,7 @@ def graficos_view():
                                                                     ft.dropdown.Option("Prefeito")
                                                                 ],
                                                                 expand=True, # Allow dropdown to expand within its column
-                                                                bgcolor="#DFEDFF", 
+                                                                bgcolor="#D6CEE5", 
                                                                 color="#000000", 
                                                                 label_style=ft.TextStyle(size=16, weight=ft.FontWeight.W_500), 
                                                                 border_radius=ft.border_radius.all(40), 
