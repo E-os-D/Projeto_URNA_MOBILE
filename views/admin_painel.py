@@ -238,7 +238,7 @@ def admin_painel_view():
                     content=ft.Column([
                         ft.Image(src="img/admin_administrador.png", width=150),
                         ft.Container(
-                            content=ft.Text("Remoção.", size=20),
+                            content=ft.Text("Visualização.", size=20),
                             alignment=ft.alignment.center_right,
                             width=150
                         )

@@ -77,7 +77,7 @@ def remocao_painel_view():
                                             spacing=60,
                                             run_spacing=60,
                                             controls=[
-                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Presidente", "/")),
+                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Presidente", "/remocao_presidente")),
                                                 ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Governador", "/")),
                                                 ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Prefeito", "/")),
                                                 ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Partido", "/")),
