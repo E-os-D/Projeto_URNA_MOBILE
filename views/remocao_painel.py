@@ -1,6 +1,6 @@
 import flet as ft
 
-def remocao_painel_view(page: ft.Page):
+def remocao_painel_view():
     def cargo_botao(nome, rota):
         return ft.Container(
             content=ft.Text(nome, size=16, weight="bold", color="black"),
@@ -60,7 +60,7 @@ def remocao_painel_view(page: ft.Page):
                             ),
                             content=ft.Column(
                                 scroll=ft.ScrollMode.AUTO,
-                                spacing=30,
+                                spacing=50,
                                 alignment=ft.MainAxisAlignment.CENTER,
                                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                                 controls=[
@@ -74,8 +74,8 @@ def remocao_painel_view(page: ft.Page):
                                         content=ft.ResponsiveRow(
                                             alignment=ft.MainAxisAlignment.CENTER,
                                             vertical_alignment=ft.CrossAxisAlignment.CENTER,
-                                            spacing=page.window_width > 800 and 30 or 10,  # maior espaçamento em telas largas
-                                            run_spacing=page.window_width > 800 and 30 or 10,
+                                            spacing=60,
+                                            run_spacing=60,
                                             controls=[
                                                 ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Presidente", "/")),
                                                 ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Governador", "/")),
@@ -86,6 +86,8 @@ def remocao_painel_view(page: ft.Page):
                                             ]
                                         )
                                     ),
+
+
                                     ft.Row(
                                         alignment=ft.MainAxisAlignment.END,
                                         controls=[

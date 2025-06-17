@@ -12,9 +12,8 @@ from views.cadastro_admin import cadastro_admin_view
 from views.cadastro_partido import cadastro_partido_view
 from views.votacao import votacao_view, proxima_votacao
 from views.resultado import resultado_view
-from views.graficos import graficos_view
+# from views.graficos import graficos_view
 from views.remocao_painel import remocao_painel_view
-from views.admin_painel import admin_painel_view
 
 
 def main(page: ft.Page):
@@ -37,7 +36,7 @@ def main(page: ft.Page):
         page.views.clear()
 
         if page.route == "/":
-            page.views.append(home_view())
+            page.views.append(home_view(page))
 
         elif page.route == "/admin_login":
             page.views.append(admin_login_view())
@@ -78,11 +77,11 @@ def main(page: ft.Page):
         elif page.route == "/resultado":
             page.views.append(resultado_view())
 
-        elif page.route == "/graficos":
-            page.views.append(graficos_view())
+        # elif page.route == "/graficos":
+        #     page.views.append(graficos_selecao_view())
 
         elif page.route == "/remocao_painel":
-            page.views.append(remocao_painel_view(page))
+            page.views.append(remocao_painel_view())
 
         page.update()
 
