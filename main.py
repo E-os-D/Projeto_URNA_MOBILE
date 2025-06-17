@@ -66,16 +66,17 @@ def main(page: ft.Page):
             page.views.append(cadastro_partido_view())
 
         elif page.route == "/votacao_presidente":
+            page.views.clear()
             page.views.append(votacao_view("Presidente"))
-
         elif page.route == "/votacao_governador":
+            page.views.clear()
             page.views.append(votacao_view("Governador"))
-
         elif page.route == "/votacao_prefeito":
+            page.views.clear()
             page.views.append(votacao_view("Prefeito"))
-
-        elif page.route == "/resultado":
-            page.views.append(resultado_view())
+        elif page.route == "/fim":
+            page.views.clear()
+            page.views.append(ft.View(route="/fim", controls=[ft.Text("FIM DA VOTAÇÃO", size=30)]))
 
         elif page.route == "/graficos":
             page.views.append(graficos_view())
