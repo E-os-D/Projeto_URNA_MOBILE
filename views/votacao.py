@@ -44,15 +44,35 @@ def votacao_view(cargo):
         else:
             e.page.go("/fim")
 
+    def candidato_existe(cargo, numero):
+        try:
+            with sqlite3.connect("urna_eletronica.db") as conn:
+                cur = conn.cursor()
+                cur.execute(
+                    f"SELECT COUNT(*) FROM {cargo} WHERE id_número_{cargo.lower()} = ?",
+                    (numero,)
+                )
+                count = cur.fetchone()[0]
+                return count > 0
+        except Exception as e:
+            print(f"Erro ao verificar candidato: {e}")
+            return False
+        
     def confirmar(e):
         if numero_digitado.value:
-            registrar_voto(cargo, int(numero_digitado.value))
-            proximo = proxima_votacao(cargo)
-            if proximo:
-                e.page.go(f"/votacao_{proximo.lower()}")
+            numero = int(numero_digitado.value)
+            if candidato_existe(cargo, numero):
+                registrar_voto(cargo, numero)
+                proximo = proxima_votacao(cargo)
+                if proximo:
+                    e.page.go(f"/votacao_{proximo.lower()}")
+                else:
+                    e.page.go("/")  # volta para a home
             else:
-                e.page.go("/fim")
-
+                e.page.dialog = ft.AlertDialog(title=ft.Text("Candidato não encontrado!"))
+                e.page.dialog.open = True
+                e.page.update()
+    
     teclado = ft.Column(
         spacing=10,
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,
