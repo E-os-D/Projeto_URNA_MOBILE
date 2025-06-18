@@ -31,66 +31,58 @@ def remocao_eleitor_view():
         if drop.value:
             excluir_eleitor(drop.value)
             snackbar.content = ft.Text("Eleitor removido com sucesso.")
-            snackbar.open = True
             drop.options = [ft.dropdown.Option(id_rg, nome) for id_rg, nome in obter_eleitores()]
             drop.value = None
-            e.page.snackbar = snackbar
-            e.page.update()
         else:
             snackbar.content = ft.Text("Selecione um eleitor.")
-            snackbar.open = True
-            e.page.snackbar = snackbar
-            e.page.update()
+
+        snackbar.open = True
+        e.page.snackbar = snackbar
+        e.page.update()
 
     return ft.View(
         route="/remocao_eleitor",
         bgcolor="#ECCAD8",
-        padding=20,
         controls=[
             ft.Container(
                 expand=True,
                 alignment=ft.alignment.center,
-                content=ft.ResponsiveRow(
-                    alignment=ft.MainAxisAlignment.CENTER,
-                    vertical_alignment=ft.CrossAxisAlignment.CENTER,
-                    controls=[
-                        ft.Container(
-                            col={"sm": 12, "md": 10, "lg": 8, "xl": 6},
-                            height=580,
-                            padding=30,
-                            bgcolor="white",
-                            border=ft.border.all(1, "black"),
-                            shadow=ft.BoxShadow(
-                                spread_radius=0,
-                                blur_radius=0,
-                                color="black",
-                                offset=ft.Offset(15, 15)
+                content=ft.Container(
+                    width=500,
+                    padding=30,
+                    bgcolor="white",
+                    border=ft.border.all(1, "black"),
+                    shadow=ft.BoxShadow(
+                        spread_radius=0,
+                        blur_radius=0,
+                        color="black",
+                        offset=ft.Offset(15, 15)
+                    ),
+                    content=ft.Column(
+                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        tight=True,
+                        controls=[
+                            ft.Text(
+                                "Qual eleitor deseja remover?",
+                                size=24,
+                                weight=ft.FontWeight.W_600,
+                                text_align=ft.TextAlign.CENTER,
                             ),
-                            content=ft.Column(
+                            drop,
+                            ft.ElevatedButton(text="Deletar", on_click=on_deletar),
+                            snackbar,
+                            ft.Row(
+                                alignment=ft.MainAxisAlignment.END,
                                 controls=[
-                                    ft.Text(
-                                        "Qual eleitor deseja remover?",
-                                        size=24,
-                                        weight=ft.FontWeight.W_600,
-                                        text_align=ft.TextAlign.CENTER,
-                                    ),
-                                    drop,
-                                    ft.ElevatedButton(text="Deletar", on_click=on_deletar),
-                                    snackbar,
-                                    ft.Row(
-                                        alignment=ft.MainAxisAlignment.END,
-                                        controls=[
-                                            ft.TextButton(
-                                                "← Voltar.",
-                                                style=ft.ButtonStyle(color="black"),
-                                                on_click=lambda e: e.page.go("/remocao_painel")
-                                            )
-                                        ]
+                                    ft.TextButton(
+                                        "← Voltar.",
+                                        style=ft.ButtonStyle(color="black"),
+                                        on_click=lambda e: e.page.go("/remocao_painel")
                                     )
                                 ]
                             )
-                        )
-                    ]
+                        ]
+                    )
                 )
             )
         ]
