@@ -138,7 +138,7 @@ def remocao_presidente_view():
 
     return ft.View(
         route="/remocao_presidente",
-        bgcolor="#DFEDFF",
+        bgcolor="#ECCAD8",
         padding=20,
         controls=[
             ft.Container(
@@ -170,7 +170,17 @@ def remocao_presidente_view():
                                    ),
                                    drop,
                                    ft.ElevatedButton(text="Deletar", on_click=on_deletar),
-                                   snackbar
+                                   snackbar,
+                                   ft.Row(
+                                    alignment=ft.MainAxisAlignment.END,
+                                        controls=[
+                                            ft.TextButton(
+                                                "← Voltar.",
+                                                style=ft.ButtonStyle(color="black"),
+                                                on_click=lambda e: e.page.go("/remocao_painel")
+                                            )
+                                        ]
+                                   )
                                 ]
                             )
                         )

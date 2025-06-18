@@ -1,5 +1,5 @@
 import flet as ft
-from database.db import conn, cursor # Assumindo que estas importações estão corretas
+from database.db import conn, cursor 
 from views.home import home_view
 from views.admin_login import admin_login_view
 from views.eleitor_login import eleitor_login_view
@@ -15,6 +15,10 @@ from views.resultado import resultado_view
 from views.graficos import graficos_view
 from views.remocao_painel import remocao_painel_view
 from views.remocao_presidente import remocao_presidente_view
+from views.remocao_governador import remocao_governador_view
+from views.remocao_prefeito import remocao_prefeito_view
+from views.remocao_partido import remocao_partido_view
+from views.remocao_eleitor import remocao_eleitor_view
 
 def main(page: ft.Page):
     page.title = "Urna Eletrônica"
@@ -86,6 +90,18 @@ def main(page: ft.Page):
 
         elif page.route == "/remocao_presidente":
             page.views.append(remocao_presidente_view())
+
+        elif page.route == "/remocao_governador":
+            page.views.append(remocao_governador_view())
+
+        elif page.route == "/remocao_prefeito":
+            page.views.append(remocao_prefeito_view())
+
+        elif page.route == "/remocao_partido":
+            page.views.append(remocao_partido_view())
+
+        elif page.route == "/remocao_eleitor":
+            page.views.append(remocao_eleitor_view())
 
         page.update()
 

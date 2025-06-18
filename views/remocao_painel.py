@@ -7,7 +7,7 @@ def remocao_painel_view():
             alignment=ft.alignment.center,
             width=220,
             height=50,
-            bgcolor="#FCF8EC",
+            bgcolor="#ECCAD8",
             border=ft.border.all(1, "black"),
             margin=ft.margin.only(top=5, left=5),
             ink=True,
@@ -65,7 +65,7 @@ def remocao_painel_view():
                                 horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                                 controls=[
                                     ft.Text(
-                                        "Quem deseja remover?",  
+                                        "Quem deseja vizualizar?",  
                                         size=24,
                                         weight=ft.FontWeight.W_600,
                                         text_align=ft.TextAlign.CENTER,
@@ -78,11 +78,11 @@ def remocao_painel_view():
                                             run_spacing=60,
                                             controls=[
                                                 ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Presidente", "/remocao_presidente")),
-                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Governador", "/")),
-                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Prefeito", "/")),
-                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Partido", "/")),
+                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Governador", "/remocao_governador")),
+                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Prefeito", "/remocao_prefeito")),
+                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Partido", "/remocao_partido")),
                                                 ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Administrador", "/")),
-                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Eleitor", "/")),
+                                                ft.Container(col={"xs": 12, "sm": 6}, content=cargo_botao("Eleitor", "/remocao_eleitor")),
                                             ]
                                         )
                                     ),
