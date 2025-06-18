@@ -7,7 +7,7 @@ def remocao_painel_view():
             alignment=ft.alignment.center,
             width=220,
             height=50,
-            bgcolor="#ECCAD8",
+            bgcolor="#FCF8EC",
             border=ft.border.all(1, "black"),
             margin=ft.margin.only(top=5, left=5),
             ink=True,
@@ -36,7 +36,7 @@ def remocao_painel_view():
 
     return ft.View(
         route="/remocao_painel",
-        bgcolor="#DFEDFF",
+        bgcolor="#ECCAD8",
         padding=20,
         controls=[
             ft.Container(

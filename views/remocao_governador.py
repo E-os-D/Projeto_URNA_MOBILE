@@ -45,7 +45,7 @@ def remocao_governador_view():
 
     return ft.View(
         route="/remocao_governador",
-        bgcolor="#D0F0C0",  # cor de fundo diferente (opcional)
+        bgcolor="#ECCAD8",  
         padding=20,
         controls=[
             ft.Container(

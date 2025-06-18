@@ -68,7 +68,7 @@ def remocao_partido_view():
 
     return ft.View(
         route="/remocao_partido",
-        bgcolor="#DAF5E7",
+        bgcolor="#ECCAD8",
         padding=20,
         controls=[
             ft.Container(
